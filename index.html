@@ -15,17 +15,17 @@
   body{font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.55;background:var(--white)}
   .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
   a{color:inherit;text-decoration:none}
-  .btn{display:inline-block;padding:13px 24px;border-radius:10px;font-weight:600;font-size:15px;transition:.18s}
+  .btn{display:inline-block;padding:13px 24px;border-radius:10px;font-weight:600;font-size:15px;transition:.18s;cursor:pointer;border:none;font-family:inherit}
   .btn-primary{background:var(--teal);color:#fff}
   .btn-primary:hover{background:var(--deep)}
-  .btn-ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink);background:transparent}
   .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
   nav{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:50}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
   .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.5px}
   .navlinks{display:flex;gap:28px;align-items:center;font-size:15px;color:var(--grey)}
   .navlinks a:hover{color:var(--teal)}
-  @media(max-width:760px){.navlinks{display:none}}
+  @media(max-width:760px){.navlinks a:not(.btn){display:none}}
   .hero{background:linear-gradient(160deg,var(--deep),var(--teal));color:#fff;padding:88px 0 96px}
   .hero h1{font-size:54px;line-height:1.05;letter-spacing:-1.5px;font-weight:800;max-width:780px}
   .hero p{font-size:20px;color:#CFE7E6;max-width:600px;margin:22px 0 34px}
@@ -67,6 +67,25 @@
   footer{padding:46px 0;border-top:1px solid var(--line);color:var(--grey);font-size:14px}
   footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
   .note{background:#fff;color:#9aa;font-size:12px;text-align:center;padding:14px}
+  .overlay{position:fixed;inset:0;background:rgba(9,59,58,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+  .overlay.open{display:flex}
+  .modal{background:#fff;border-radius:20px;max-width:520px;width:100%;max-height:92vh;overflow:auto;padding:32px}
+  .modal h3{font-size:24px;letter-spacing:-.5px;margin-bottom:4px}
+  .modal .sub{color:var(--grey);font-size:15px;margin-bottom:20px}
+  .modal .x{float:right;font-size:24px;color:var(--grey);cursor:pointer;line-height:1;border:none;background:none}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px}
+  .field input,.field textarea{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-size:15px;font-family:inherit;color:var(--ink)}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--teal)}
+  .field.two{display:flex;gap:12px}.field.two>div{flex:1}
+  .modal .btn-primary{width:100%;margin-top:8px}
+  .msg{padding:12px 14px;border-radius:9px;font-size:14px;margin-top:14px;display:none}
+  .msg.ok{display:block;background:var(--lite);color:var(--deep)}
+  .msg.err{display:block;background:#FBEDEC;color:#B3261E}
+  .success{text-align:center;padding:18px 0}
+  .success .big{font-size:46px}
+  .success h4{font-size:20px;margin:10px 0 6px}
+  .success p{color:var(--grey);font-size:15px}
 </style>
 </head>
 <body>
@@ -80,7 +99,7 @@
     <a href="#product">Product</a>
     <a href="#model">Pricing</a>
     <a href="#why">Why Vetra</a>
-    <a href="#demo" class="btn btn-primary" style="padding:9px 18px">Book a demo</a>
+    <button class="btn btn-primary" style="padding:9px 18px" onclick="openDemo()">Book a demo</button>
   </div>
 </div></nav>
 
@@ -89,7 +108,7 @@
   <h1>The operating system for veterinary care.</h1>
   <p>One platform for scheduling, medical records, an AI clinical scribe, client messaging, and integrated payments — built for the practices that stay independent.</p>
   <div class="cta">
-    <a href="#demo" class="btn btn-primary">Book a demo</a>
+    <button class="btn btn-primary" onclick="openDemo()">Book a demo</button>
     <a href="#product" class="btn btn-ghost">See the platform</a>
   </div>
 </div></header>
@@ -137,7 +156,7 @@
   <div class="final">
     <h2>Run a modern practice.</h2>
     <p>See how Vetra brings your whole clinic into one system — book a 20-minute walkthrough.</p>
-    <a href="mailto:hello@vetra.example?subject=Vetra%20demo" class="btn btn-primary">Book a demo</a>
+    <button class="btn btn-primary" onclick="openDemo()">Book a demo</button>
   </div>
 </div></section>
 
@@ -146,6 +165,93 @@
   <div>© 2026 Vetra, Inc. · Austin, Texas · hello@vetra.example</div>
 </div></div></footer>
 <div class="note">Illustrative marketing site for a fictional company created as a demonstration.</div>
+
+<div class="overlay" id="demoOverlay" onclick="if(event.target===this)closeDemo()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
+    <button class="x" onclick="closeDemo()" aria-label="Close">&times;</button>
+    <div id="demoFormWrap">
+      <h3 id="demoTitle">Book a demo</h3>
+      <div class="sub">Tell us about your practice and we'll be in touch within one business day.</div>
+      <form id="demoForm">
+        <div class="field">
+          <label for="clinicName">Clinic name *</label>
+          <input id="clinicName" name="clinicName" required placeholder="Cedar Creek Animal Hospital">
+        </div>
+        <div class="field two">
+          <div>
+            <label for="contactName">Your name</label>
+            <input id="contactName" name="contactName" placeholder="Dr. Jane Smith">
+          </div>
+          <div>
+            <label for="vets"># of vets</label>
+            <input id="vets" name="vets" type="number" min="1" placeholder="3">
+          </div>
+        </div>
+        <div class="field two">
+          <div>
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" required placeholder="you@clinic.com">
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" placeholder="+1 555 000 0000">
+          </div>
+        </div>
+        <div class="field">
+          <label for="location">Location</label>
+          <input id="location" name="location" placeholder="Austin, TX">
+        </div>
+        <div class="field">
+          <label for="notes">What are you hoping to improve?</label>
+          <textarea id="notes" name="notes" rows="3" placeholder="Tired of our legacy system; want payments + records in one place."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="demoSubmit">Request demo</button>
+        <div class="msg" id="demoMsg"></div>
+      </form>
+    </div>
+    <div id="demoSuccess" class="success" style="display:none">
+      <div class="big">🎉</div>
+      <h4>Thanks — request received!</h4>
+      <p>Our team will reach out within one business day to schedule your walkthrough.</p>
+      <button class="btn btn-ghost" style="margin-top:18px" onclick="closeDemo()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  var WEBHOOK_URL = "https://jneatothegoat.app.n8n.cloud/webhook/vetra-lead";
+  function openDemo(){ document.getElementById('demoOverlay').classList.add('open'); }
+  function closeDemo(){
+    document.getElementById('demoOverlay').classList.remove('open');
+    document.getElementById('demoFormWrap').style.display='block';
+    document.getElementById('demoSuccess').style.display='none';
+    document.getElementById('demoForm').reset();
+    var m=document.getElementById('demoMsg'); m.className='msg'; m.textContent='';
+  }
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape')closeDemo(); });
+  document.getElementById('demoForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('demoSubmit'), msg=document.getElementById('demoMsg');
+    var data={
+      clinicName:clinicName.value.trim(), contactName:contactName.value.trim(),
+      email:email.value.trim(), phone:phone.value.trim(),
+      location:location.value.trim(), vets:vets.value?Number(vets.value):0,
+      source:"Website", notes:notes.value.trim()
+    };
+    btn.disabled=true; btn.textContent="Sending…"; msg.className='msg';
+    fetch(WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)})
+      .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json().catch(function(){return {};}); })
+      .then(function(){
+        document.getElementById('demoFormWrap').style.display='none';
+        document.getElementById('demoSuccess').style.display='block';
+      })
+      .catch(function(){
+        msg.className='msg err';
+        msg.textContent="Something went wrong sending your request. Please email hello@vetra.example and we'll help.";
+      })
+      .finally(function(){ btn.disabled=false; btn.textContent="Request demo"; });
+  });
+</script>
 
 </body>
 </html>
