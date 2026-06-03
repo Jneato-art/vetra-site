@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vetra — The operating system for veterinary care</title>
+<meta name="description" content="Vetra is the all-in-one software and payments platform built for independent veterinary practices. Scheduling, records, an AI scribe, client messaging, and integrated payments in one system.">
+<style>
+  :root{
+    --teal:#0E7C7B; --deep:#093B3A; --mint:#02C39A; --ink:#0F2E2E;
+    --grey:#5A6B6B; --lite:#ECF5F4; --sand:#F7FBFA; --line:#DDECEB; --white:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.55;background:var(--white)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+  .btn{display:inline-block;padding:13px 24px;border-radius:10px;font-weight:600;font-size:15px;transition:.18s}
+  .btn-primary{background:var(--teal);color:#fff}
+  .btn-primary:hover{background:var(--deep)}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+  nav{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:50}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.5px}
+  .navlinks{display:flex;gap:28px;align-items:center;font-size:15px;color:var(--grey)}
+  .navlinks a:hover{color:var(--teal)}
+  @media(max-width:760px){.navlinks{display:none}}
+  .hero{background:linear-gradient(160deg,var(--deep),var(--teal));color:#fff;padding:88px 0 96px}
+  .hero h1{font-size:54px;line-height:1.05;letter-spacing:-1.5px;font-weight:800;max-width:780px}
+  .hero p{font-size:20px;color:#CFE7E6;max-width:600px;margin:22px 0 34px}
+  .hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero .btn-ghost{border-color:rgba(255,255,255,.4);color:#fff}
+  .hero .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:#fff;color:#fff}
+  .pill{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#CFE7E6;font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;margin-bottom:24px}
+  @media(max-width:760px){.hero h1{font-size:36px}.hero p{font-size:17px}}
+  .stats{background:var(--deep);color:#fff;padding:34px 0}
+  .stats .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .stat{flex:1;min-width:140px}
+  .stat b{display:block;font-size:34px;font-weight:800;color:var(--mint)}
+  .stat span{color:#9FC4C3;font-size:14px}
+  section{padding:84px 0}
+  .eyebrow{color:var(--teal);font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+  h2{font-size:38px;letter-spacing:-1px;font-weight:800;max-width:640px}
+  .lead{color:var(--grey);font-size:18px;max-width:620px;margin-top:14px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--sand);border:1px solid var(--line);border-radius:16px;padding:28px}
+  .card .ic{width:42px;height:42px;border-radius:11px;background:var(--teal);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:20px}
+  .card h3{font-size:18px;margin-bottom:8px}
+  .card p{color:var(--grey);font-size:15px}
+  .band{background:var(--lite)}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px}
+  @media(max-width:860px){.three{grid-template-columns:1fr}}
+  .mcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px}
+  .mcard b{display:block;font-size:42px;font-weight:800;color:var(--teal)}
+  .mcard .mt{font-weight:700;font-size:17px;margin:6px 0 6px}
+  .mcard p{color:var(--grey);font-size:14px}
+  .quote{text-align:center;max-width:780px;margin:0 auto}
+  .quote p{font-size:27px;line-height:1.4;font-weight:600;letter-spacing:-.4px}
+  .quote .who{color:var(--grey);font-size:15px;margin-top:22px}
+  .final{background:linear-gradient(160deg,var(--teal),var(--deep));color:#fff;border-radius:24px;padding:64px 40px;text-align:center}
+  .final h2{margin:0 auto;color:#fff}
+  .final p{color:#CFE7E6;font-size:18px;margin:16px auto 30px;max-width:520px}
+  .final .btn-primary{background:#fff;color:var(--deep)}
+  .final .btn-primary:hover{background:#CFE7E6}
+  footer{padding:46px 0;border-top:1px solid var(--line);color:var(--grey);font-size:14px}
+  footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
+  .note{background:#fff;color:#9aa;font-size:12px;text-align:center;padding:14px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <div class="brand">
+    <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 14 H8 L11 6 L15 21 L18 10 L20 14 H23" fill="none" stroke="#0E7C7B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Vetra
+  </div>
+  <div class="navlinks">
+    <a href="#product">Product</a>
+    <a href="#model">Pricing</a>
+    <a href="#why">Why Vetra</a>
+    <a href="#demo" class="btn btn-primary" style="padding:9px 18px">Book a demo</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="pill">Now serving 8,400+ independent clinics</span>
+  <h1>The operating system for veterinary care.</h1>
+  <p>One platform for scheduling, medical records, an AI clinical scribe, client messaging, and integrated payments — built for the practices that stay independent.</p>
+  <div class="cta">
+    <a href="#demo" class="btn btn-primary">Book a demo</a>
+    <a href="#product" class="btn btn-ghost">See the platform</a>
+  </div>
+</div></header>
+
+<div class="stats"><div class="wrap"><div class="row">
+  <div class="stat"><b>8,400</b><span>Active clinics</span></div>
+  <div class="stat"><b>$13.6B</b><span>Payments processed / yr</span></div>
+  <div class="stat"><b>121%</b><span>Net revenue retention</span></div>
+  <div class="stat"><b>4.9/5</b><span>Average customer rating</span></div>
+</div></div></div>
+
+<section id="product"><div class="wrap">
+  <div class="eyebrow">The platform</div>
+  <h2>Everything your clinic runs on, in one login.</h2>
+  <p class="lead">Replace the tangle of legacy software, card terminals, and spreadsheets with a single modern system.</p>
+  <div class="grid">
+    <div class="card"><div class="ic">📅</div><h3>Scheduling & EMR</h3><p>Cloud records and a shared calendar for the whole team, on any device.</p></div>
+    <div class="card"><div class="ic">🎙️</div><h3>AI clinical scribe</h3><p>Drafts visit notes automatically from the exam-room conversation.</p></div>
+    <div class="card"><div class="ic">💬</div><h3>Client messaging</h3><p>Automated reminders, two-way texting, and effortless review capture.</p></div>
+    <div class="card"><div class="ic">💳</div><h3>Vetra Payments</h3><p>Integrated card processing, payment plans, and client financing.</p></div>
+    <div class="card"><div class="ic">📦</div><h3>Inventory & marketplace</h3><p>Live stock tracking with one-tap re-ordering from suppliers.</p></div>
+    <div class="card"><div class="ic">📈</div><h3>Analytics</h3><p>Real-time dashboards on revenue, retention, and capacity.</p></div>
+  </div>
+</div></section>
+
+<section id="model" class="band"><div class="wrap">
+  <div class="eyebrow">Pricing that scales with you</div>
+  <h2>Simple software. Payments that pay for themselves.</h2>
+  <div class="three">
+    <div class="mcard"><b>$499</b><div class="mt">Core / mo</div><p>Scheduling, EMR, client messaging, and analytics for a single location.</p></div>
+    <div class="mcard"><b>0.85%</b><div class="mt">+ Payments</div><p>Transparent processing on every transaction — plans and financing included.</p></div>
+    <div class="mcard"><b>Custom</b><div class="mt">Multi-site</div><p>Group dashboards, role controls, and dedicated onboarding for practice groups.</p></div>
+  </div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <div class="quote">
+    <div class="eyebrow" style="text-align:center">Why clinics switch</div>
+    <p>“We replaced four vendors with Vetra and got two hours a day back per vet. Payments and records finally live in the same place.”</p>
+    <div class="who">— Dr. Lena Ortiz, Cedar Creek Animal Hospital</div>
+  </div>
+</div></section>
+
+<section id="demo" style="padding-top:0"><div class="wrap">
+  <div class="final">
+    <h2>Run a modern practice.</h2>
+    <p>See how Vetra brings your whole clinic into one system — book a 20-minute walkthrough.</p>
+    <a href="mailto:hello@vetra.example?subject=Vetra%20demo" class="btn btn-primary">Book a demo</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><div class="row">
+  <div class="brand" style="font-size:18px"><svg width="20" height="20" viewBox="0 0 26 26"><path d="M3 14 H8 L11 6 L15 21 L18 10 L20 14 H23" fill="none" stroke="#0E7C7B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Vetra</div>
+  <div>© 2026 Vetra, Inc. · Austin, Texas · hello@vetra.example</div>
+</div></div></footer>
+<div class="note">Illustrative marketing site for a fictional company created as a demonstration.</div>
+
+</body>
+</html>
